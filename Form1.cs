@@ -14,7 +14,6 @@ namespace Testovoe
 {
     public partial class Form1 : Form
     {
-        private const string conString = "Server=localhost ;Port=3306; database=mydb; UID=root; password=кщще";
         private readonly DataService _dataService;
         private readonly List<ProductType> _productTypes;
         private readonly ReportGenerator _reportGenerator;
@@ -22,7 +21,7 @@ namespace Testovoe
         public Form1()
         {
             InitializeComponent();
-            _dataService = new DataService(conString);
+            _dataService = new DataService(System.Configuration.ConfigurationSettings.AppSettings["DbCon"]);
             _productTypes = _dataService.GetProductsTypeData();
             var providers = _dataService.GetProvidersData();
             foreach (var provider in providers)
